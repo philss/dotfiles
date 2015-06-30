@@ -1,0 +1,3 @@
+[submodule "venci"]
+	path = vim
+	url = git@github.com:philss/venci.git
