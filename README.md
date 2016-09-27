@@ -1,5 +1,7 @@
 # dot files
 
+![Vim and Tmux](./sample.png)
+
 Some of my configuration files.
 Clone it with `git clone --recursive`.
 
