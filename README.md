@@ -7,9 +7,23 @@ Clone it with `git clone --recursive`.
 
 ## Installation
 
-For vim, you can follow the instructions [here](https://github.com/philss/venci#how-to-install).
+## General dependencies
 
-For the git scripts, you can copy or add the files under `git/` directory to the PATH variable.
+- [rustup](https://rustup.rs/)
+- [asdf](https://github.com/asdf-vm/asdf)
+- [alacritty](https://github.com/alacritty/alacritty)
+
+For neovim, you can follow the instructions [here](https://github.com/philss/venci#how-to-install).
+
+## Ubuntu dependencies
+
+    sudo apt install fish curl git build-essential nvim tmux fonts-powerline
+
+## Rust tools
+
+It depends on the installation of `rustup`.
+
+    cargo install ripgrep fd-find alacritty bat git-delta
 
 ## License
 
