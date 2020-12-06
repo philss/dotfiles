@@ -12,12 +12,14 @@ Clone it with `git clone --recursive`.
 - [rustup](https://rustup.rs/)
 - [asdf](https://github.com/asdf-vm/asdf)
 - [alacritty](https://github.com/alacritty/alacritty)
+- [Oh-my-fish](https://github.com/oh-my-fish/oh-my-fish#installation)
+- [vim-plug](https://github.com/junegunn/vim-plug#installation)
 
 For neovim, you can follow the instructions [here](https://github.com/philss/venci#how-to-install).
 
 ## Ubuntu dependencies
 
-    sudo apt install fish curl git build-essential nvim tmux fonts-powerline
+    sudo apt install fish curl git build-essential nvim tmux fonts-powerline gnome-shell-pomodoro
 
 ## Rust tools
 
