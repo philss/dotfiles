@@ -70,7 +70,7 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: "DejaVu Sans Mono for Powerline"
+    family: "DejaVu Sans Mono Nerd Font"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
