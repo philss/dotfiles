@@ -35,12 +35,15 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tamton-aquib/staline.nvim'
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
 Plug 'ray-x/navigator.lua'
+Plug 'blackCauldron7/surround.nvim'
 
-" Lang server
+" Lang server and diagnostics
 " watch out for Elixir LS setup:
 " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
+Plug 'folke/lsp-colors.nvim'
+Plug 'folke/trouble.nvim'
 
 " Completion
 Plug 'hrsh7th/vim-vsnip'
@@ -53,9 +56,6 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'savq/melange'
-
-" Inception. Installs this repository to get ftplugins and other configurations
-Plug 'philss/venci'
 
 " Initialize plugin system
 call plug#end()
@@ -225,6 +225,9 @@ require'lspconfig'.elixirls.setup{
 require'nvim-web-devicons'.setup{}
 require'navigator'.setup{}
 require'staline'.setup{}
+require'trouble'.setup {}
+-- TODO: fix this surrounding
+require'surround'.setup{ mappings_style = "surround" }
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -244,6 +247,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Show hover doc
 nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+
+" Show actions
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
