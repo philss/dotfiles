@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Grep files that contains a given term
-git grep $1 | awk -F ':' '{print $1}' | sort | uniq
