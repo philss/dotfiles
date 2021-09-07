@@ -10,6 +10,7 @@ filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Langs
+Plug 'elixir-editors/vim-elixir'
 Plug 'vim-ruby/vim-ruby'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
@@ -23,8 +24,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'Lokaltog/vim-easymotion'
@@ -86,7 +85,7 @@ set hlsearch
 
 " USABILITY -------------------------------------
 
-"add some line space for easy reading
+" add some line space for easy reading
 set linespace=4
 
 " Use case insensitive search, except when using capital letters
@@ -142,13 +141,6 @@ map gft <C-w>gf<CR>
 " Max of open tabs opened
 set tabpagemax=100
 
-" Blank spaces killer
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd WinEnter * match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " Run to clean trailing whitespace
@@ -200,9 +192,6 @@ local custom_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
@@ -226,8 +215,7 @@ require'nvim-web-devicons'.setup{}
 require'navigator'.setup{}
 require'staline'.setup{}
 require'trouble'.setup {}
--- TODO: fix this surrounding
-require'surround'.setup{ mappings_style = "surround" }
+require'surround'.setup{ mappings_style = 'surround' }
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -239,6 +227,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+require'lspsaga'.init_lsp_saga()
 EOF
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -251,6 +240,16 @@ nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 " Show actions
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+
+" Show line diagnostic
+nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+
+" Only show diagnostic if cursor is over the area
+" nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+
+" Jump diagnostic
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
