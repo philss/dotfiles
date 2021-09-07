@@ -258,7 +258,7 @@ nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_pr
 nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 
 " Hop to some visible part
-nnoremap <silent><leader>t <cmd>lua require'hop'.hint_words()<CR>
+nnoremap <silent><leader>w <cmd>lua require'hop'.hint_words()<CR>
 nnoremap <silent><leader>b <cmd>lua require'hop'.hint_words()<CR>
 
 " Toggle trouble panel
