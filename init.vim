@@ -26,15 +26,17 @@ Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mhinz/vim-mix-format'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tamton-aquib/staline.nvim'
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-Plug 'ray-x/navigator.lua'
 Plug 'blackCauldron7/surround.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'terrortylor/nvim-comment'
 
 " Lang server and diagnostics
 " watch out for Elixir LS setup:
@@ -54,7 +56,6 @@ Plug 'rafamadriz/friendly-snippets'
 " ColorScheme
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
-Plug 'savq/melange'
 
 " Initialize plugin system
 call plug#end()
@@ -156,10 +157,6 @@ vmap <C-c> :w !pbcopy<CR><CR>
 vmap <C-x> :!pbcopy<CR>
 
 " Linters - JS, SCSS and Ruby
-let g:neomake_ruby_enabled_makers = ['rubocop']
-let g:neomake_scss_makers = ['scss_lint']
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_sml_enabled_makers = ['smlnj']
 let g:neomake_html_tidy_ignore_errors = ['proprietary attribute "v-']
 
 let g:neomake_error_sign = {'text': 'E>', 'texthl': 'ErrorMsg'}
@@ -199,7 +196,8 @@ local custom_attach = function(client, bufnr)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 
-  require'completion'.on_attach();
+  require'completion'.on_attach()
+  require'lspsaga'.init_lsp_saga()
 end
 
 require'lspconfig'.elixirls.setup{
@@ -212,10 +210,14 @@ require'lspconfig'.elixirls.setup{
 }
 
 require'nvim-web-devicons'.setup{}
-require'navigator'.setup{}
 require'staline'.setup{}
-require'trouble'.setup {}
+require'trouble'.setup{}
 require'surround'.setup{ mappings_style = 'surround' }
+require'nvim_comment'.setup {
+  comment_empty = false,
+  line_mapping = "<leader>cc",
+  operator_mapping = "<leader>c"
+}
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -227,12 +229,16 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
-require'lspsaga'.init_lsp_saga()
+require'hop'.setup()
 EOF
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use tab and s-tab for smart completion (besides auto popup)
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
 
 " Show hover doc
 nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
@@ -251,5 +257,18 @@ nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagn
 nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 
+" Hop to some visible part
+nnoremap <silent><leader>t <cmd>lua require'hop'.hint_words()<CR>
+nnoremap <silent><leader>b <cmd>lua require'hop'.hint_words()<CR>
+
+" Toggle trouble panel
+nnoremap <silent>T <cmd>TroubleToggle<CR>
+
+" Find files with telescope 
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
