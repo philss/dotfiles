@@ -1,0 +1,30 @@
+[user]
+  name = My Name
+  email = myemail@example.com
+  signingkey = my8digitssignkey
+
+[color]
+  ui = true
+
+[core]
+  editor = nvim
+  excludesfile = /home/philip/.config/git/global_ignore
+  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+
+[push]
+  default = simple
+
+[pull]
+  rebase = true
+
+[commit]
+  gpgsign = true
+
+[alias]
+  commit = commit -S -v
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  tool = vimdiff
