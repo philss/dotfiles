@@ -211,6 +211,9 @@ require'lspconfig'.elixirls.setup{
 
 require'nvim-web-devicons'.setup{}
 require'staline'.setup{}
+require'stabline'.setup{
+  stab_bg = "#3b3735"
+}
 require'trouble'.setup{}
 require'surround'.setup{ mappings_style = 'surround' }
 require'nvim_comment'.setup {
