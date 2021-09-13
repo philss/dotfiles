@@ -22,6 +22,7 @@ Plug 'mracos/mermaid.vim'
 " Plugins
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/playground'
 Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -37,6 +38,7 @@ Plug 'blackCauldron7/surround.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'terrortylor/nvim-comment'
+Plug 'numtostr/FTerm.nvim'
 
 " Lang server and diagnostics
 " watch out for Elixir LS setup:
@@ -145,7 +147,7 @@ set tabpagemax=100
 autocmd BufWinLeave * call clearmatches()
 
 " Run to clean trailing whitespace
-command FixSpaces %s/\s\+$/
+command! FixSpaces %s/\s\+$/
 
 " Reload the file on changes
 set autoread
@@ -223,6 +225,11 @@ require'nvim_comment'.setup {
 }
 
 require'nvim-treesitter.configs'.setup {
+  playground = {
+    enabled = true,
+    updatetime = 30,
+    persist_queries = false
+  },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -269,6 +276,9 @@ nnoremap <silent>T <cmd>TroubleToggle<CR>
 
 " Find files with telescope 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+
+" Open FTerm
+nnoremap <silent><leader>t <cmd>lua require('FTerm').toggle()<cr>
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
