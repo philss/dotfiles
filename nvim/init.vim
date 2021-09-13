@@ -277,8 +277,9 @@ nnoremap <silent>T <cmd>TroubleToggle<CR>
 " Find files with telescope 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 
-" Open FTerm
-nnoremap <silent><leader>t <cmd>lua require('FTerm').toggle()<cr>
+" Open tests with FTerm
+nnoremap <silent><leader>t <cmd>lua require('fterm-tests-runner').run_tests()<cr>
+nnoremap <silent><leader>a <cmd>lua require('fterm-tests-runner').run_all_tests()<cr>
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
