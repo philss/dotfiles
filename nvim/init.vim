@@ -58,6 +58,7 @@ Plug 'rafamadriz/friendly-snippets'
 " ColorScheme
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'rose-pine/neovim'
 
 " Initialize plugin system
 call plug#end()
