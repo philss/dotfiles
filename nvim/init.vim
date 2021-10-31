@@ -10,7 +10,7 @@ filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Langs
-Plug 'elixir-editors/vim-elixir'
+" Plug 'elixir-editors/vim-elixir'
 Plug 'vim-ruby/vim-ruby'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
@@ -22,6 +22,7 @@ Plug 'mracos/mermaid.vim'
 " Plugins
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
@@ -47,6 +48,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'simrat39/rust-tools.nvim'
 
 " Completion
 Plug 'hrsh7th/vim-vsnip'
@@ -211,6 +213,11 @@ require'lspconfig'.elixirls.setup{
     fetchDeps = false
   };
 }
+
+-- Config Rust analyzer with batteries
+-- You need to install the lang server before:
+-- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
+require'rust-tools'.setup{}
 
 require'nvim-web-devicons'.setup{}
 require'staline'.setup{}
