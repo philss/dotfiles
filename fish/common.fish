@@ -15,3 +15,5 @@ if status --is-interactive
   abbr -a ls exa
   abbr -a tree "exa -T"
 end
+
+source ~/.asdf/asdf.fish

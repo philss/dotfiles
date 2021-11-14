@@ -6,64 +6,8 @@ set termguicolors
 set nocompatible
 filetype off
 
-" Specify a directory for plugins
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Langs
-" Plug 'elixir-editors/vim-elixir'
-Plug 'vim-ruby/vim-ruby'
-Plug 'cespare/vim-toml'
-Plug 'rust-lang/rust.vim'
-Plug 'wlangstroth/vim-racket'
-Plug 'ElmCast/elm-vim'
-Plug 'hashivim/vim-hashicorp-tools'
-Plug 'mracos/mermaid.vim'
-
-" Plugins
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/playground'
-Plug 'neomake/neomake'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'phaazon/hop.nvim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'mhinz/vim-mix-format'
-Plug 'farmergreg/vim-lastplace'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'tamton-aquib/staline.nvim'
-Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-Plug 'blackCauldron7/surround.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'terrortylor/nvim-comment'
-Plug 'numtostr/FTerm.nvim'
-
-" Lang server and diagnostics
-" watch out for Elixir LS setup:
-" https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
-Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'folke/lsp-colors.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'simrat39/rust-tools.nvim'
-
-" Completion
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-treesitter/completion-treesitter'
-Plug 'rafamadriz/friendly-snippets'
-
-" ColorScheme
-Plug 'rktjmp/lush.nvim'
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'rose-pine/neovim'
-
-" Initialize plugin system
-call plug#end()
+" Require plugins
+lua require('plugins')
 
 " Toggle past mode
 set pastetoggle=<F2>
@@ -120,7 +64,7 @@ set mouse=a
 set number
 
 set undofile
-set undodir="$HOME/.VIM_UNDO_FILES"
+set undodir="$HOME/tmp/nvim_undo_files"
 
 " IDENTATION -----------------------------------
 
