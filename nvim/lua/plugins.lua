@@ -38,7 +38,7 @@ return require('packer').startup(function()
   -- watch out for Elixir LS setup:
   -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#elixirls
   use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
+  use 'tami5/lspsaga.nvim'
   use 'folke/lsp-colors.nvim'
   use 'folke/trouble.nvim'
   use 'simrat39/rust-tools.nvim'
