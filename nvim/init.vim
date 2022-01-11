@@ -99,7 +99,7 @@ command! FixSpaces %s/\s\+$/
 " Reload the file on changes
 set autoread
 
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " Copy and cut an entire line to clipboard
 vmap <C-c> :w !pbcopy<CR><CR>
@@ -127,10 +127,6 @@ let g:python_host_prog = '/usr/local/bin/python'
 " this directory.
 set path=$PWD/**
 
-" Completion integration with snippets
-let g:completion_enable_snippet = 'vim-vsnip'
-let g:completion_timer_cycle = 200
-
 " Config LangServer
 lua << EOF
 local custom_attach = function(client, bufnr)
@@ -138,23 +134,47 @@ local custom_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-  require'completion'.on_attach()
   require'lspsaga'.init_lsp_saga()
 end
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- Configure ElixirLS as the LSP server for Elixir.
 require'lspconfig'.elixirls.setup{
-  cmd = { "/home/philip/sandbox/elixir-ls/release/language_server.sh" };
-  on_attach = custom_attach;
+  cmd = { "/home/philip/sandbox/elixir-ls/release/language_server.sh" },
+  on_attach = custom_attach,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
   elixirLS = {
     dialyzerEnabled = false,
-    fetchDeps = false
+    fetchDeps = false,
   };
 }
 
@@ -163,12 +183,57 @@ require'lspconfig'.elixirls.setup{
 -- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 require'rust-tools'.setup{}
 
+local luasnip = require 'luasnip'
+-- nvim-cmp
+local cmp = require 'cmp'
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+
 require'nvim-web-devicons'.setup{}
 require'staline'.setup{}
 require'stabline'.setup{
   stab_bg = "#3b3735"
 }
-require'trouble'.setup{}
 require'surround'.setup{ mappings_style = 'surround' }
 require'nvim_comment'.setup {
   comment_empty = false,
@@ -178,7 +243,7 @@ require'nvim_comment'.setup {
 
 require'nvim-treesitter.configs'.setup {
   playground = {
-    enabled = true,
+    enabled = false,
     updatetime = 30,
     persist_queries = false
   },
@@ -198,10 +263,6 @@ EOF
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Use tab and s-tab for smart completion (besides auto popup)
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
-
 " Show hover doc
 nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 
@@ -212,9 +273,6 @@ vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_a
 " Show line diagnostic
 nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 
-" Only show diagnostic if cursor is over the area
-" nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
-
 " Jump diagnostic
 nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
@@ -222,9 +280,6 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 " Hop to some visible part
 nnoremap <silent><leader>w <cmd>lua require'hop'.hint_words()<CR>
 nnoremap <silent><leader>b <cmd>lua require'hop'.hint_words()<CR>
-
-" Toggle trouble panel
-nnoremap <silent>T <cmd>TroubleToggle<CR>
 
 " Find files with telescope 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>

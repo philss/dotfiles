@@ -13,12 +13,10 @@ return require('packer').startup(function()
   use 'mracos/mermaid.vim'
 
   -- Plugins
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-refactor'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'nvim-treesitter/playground'
   use 'neomake/neomake'
-  use 'scrooloose/nerdtree'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'phaazon/hop.nvim'
@@ -33,6 +31,13 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use 'terrortylor/nvim-comment'
   use 'numtostr/FTerm.nvim'
+  use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
+      config = function() require'nvim-tree'.setup {} end
+  }
 
   -- Lang server and diagnostics
   -- watch out for Elixir LS setup:
@@ -40,15 +45,14 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'tami5/lspsaga.nvim'
   use 'folke/lsp-colors.nvim'
-  use 'folke/trouble.nvim'
   use 'simrat39/rust-tools.nvim'
 
   -- Completion
-  use 'hrsh7th/vim-vsnip'
-  use 'hrsh7th/vim-vsnip-integ'
-  use 'nvim-lua/completion-nvim'
   use 'nvim-treesitter/completion-treesitter'
-  use 'rafamadriz/friendly-snippets'
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   -- ColorScheme
   use 'rktjmp/lush.nvim'
