@@ -5,6 +5,7 @@ set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 set -x GPG_TTY (tty)
 set -x EDITOR nvim
 set -x ECTO_EDITOR nvim
+set -x FLYCTL_INSTALL "/home/philip/.fly"
 
 if status --is-interactive
   set -g fish_user_abbreviations
