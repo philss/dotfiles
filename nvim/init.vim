@@ -181,7 +181,15 @@ require'lspconfig'.elixirls.setup{
 -- Config Rust analyzer with batteries
 -- You need to install the lang server before:
 -- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
-require'rust-tools'.setup{}
+require'rust-tools'.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      procMacro = {
+        enable = true
+      }
+    }
+  }
+})
 
 local luasnip = require 'luasnip'
 -- nvim-cmp
