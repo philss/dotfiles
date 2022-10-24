@@ -162,7 +162,7 @@ end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Configure ElixirLS as the LSP server for Elixir.
 require'lspconfig'.elixirls.setup{
@@ -184,9 +184,6 @@ require'lspconfig'.elixirls.setup{
 require'rust-tools'.setup({
   settings = {
     ["rust-analyzer"] = {
-      procMacro = {
-        enable = true
-      }
     }
   }
 })
