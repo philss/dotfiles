@@ -58,4 +58,5 @@ return require('packer').startup(function()
   use 'rktjmp/lush.nvim'
   use 'ellisonleao/gruvbox.nvim'
   use 'rose-pine/neovim'
+  use { 'embark-theme/vim', as = 'embark' }
 end)

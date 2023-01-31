@@ -18,7 +18,7 @@ set showcmd
 set background=dark
 
 let g:gruvbox_italic=1
-colorscheme gruvbox
+colorscheme embark
 
 " Enable light line
 set laststatus=2
