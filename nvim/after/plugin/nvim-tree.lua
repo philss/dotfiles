@@ -1,4 +1,4 @@
-require("nvim-tree").setup()
+require('nvim-tree').setup()
 
--- Mapping control + <tab> to go to the previous tab
-vim.keymap.set("n", "T", ":NvimTreeToggle<CR>")
+-- Mapping `<shift> + t` to toggle the nvim-tree
+vim.keymap.set('n', 'T', ':NvimTreeToggle<CR>')
