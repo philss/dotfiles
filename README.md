@@ -2,29 +2,24 @@
 
 ![Vim and Tmux](./sample.png)
 
-Some of my configuration files.
-
-## Installation
+Most of my configuration files.
 
 ## General dependencies
 
-- [rustup](https://rustup.rs/)
-- [asdf](https://github.com/asdf-vm/asdf)
 - [alacritty](https://github.com/alacritty/alacritty)
-- [fish](https://fishshell.com/)
-- [Oh-my-fish](https://github.com/oh-my-fish/oh-my-fish#installation)
-- [vim-plug](https://github.com/junegunn/vim-plug#installation)
+- [asdf](https://github.com/asdf-vm/asdf)
+- [fish](https://fishshell.com/) and [Oh-my-fish](https://github.com/oh-my-fish/oh-my-fish#installation)
+- [neovim](https://github.com/neovim/neovim)
 - [nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
+- [rustup](https://rustup.rs/)
+- [tmux](https://github.com/tmux/tmux)
 
-## Ubuntu dependencies
+## Command line tools
 
-    sudo apt install fish curl git build-essential nvim tmux gnome-shell-pomodoro
-
-## Rust tools
-
-It depends on the installation of `rustup`.
-
-    cargo install ripgrep fd-find alacritty bat git-delta
+- [bat](https://github.com/sharkdp/bat)
+- [delta](https://github.com/dandavison/delta)
+- [fd-find](https://github.com/sharkdp/fd)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 ## License
 
