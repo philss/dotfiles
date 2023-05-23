@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
   -- Colorschemes
   use { 'embark-theme/vim', as = 'embark' }
   use { 'rose-pine/neovim', as = 'rose-pine' }
+  use { 'catppuccin/nvim' , as = 'catppuccin' }
 
   -- LSP
   use 'neovim/nvim-lspconfig'
