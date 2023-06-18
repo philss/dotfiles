@@ -1,6 +1,7 @@
 set -g fish_user_paths "$HOME/bin" $fish_user_paths
 set -g fish_user_paths "$HOME/.cargo/bin" $fish_user_paths
 set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
+set -g fish_user_paths "$HOME/.cache/rebar3/bin" $fish_user_paths
 
 set -x GPG_TTY (tty)
 set -x EDITOR nvim
