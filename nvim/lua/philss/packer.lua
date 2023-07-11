@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use 'terrortylor/nvim-comment'
   use { 'kylechui/nvim-surround', tag = '*' }
   use 'numToStr/FTerm.nvim'
+  use 'tpope/vim-fugitive'
 
   -- Status bar
   use 'kyazdani42/nvim-web-devicons'
