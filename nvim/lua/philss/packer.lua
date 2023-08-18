@@ -40,6 +40,9 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- Minimap
+  use 'gorbit99/codewindow.nvim'
+
   -- Colorschemes
   use { 'embark-theme/vim', as = 'embark' }
   use { 'rose-pine/neovim', as = 'rose-pine' }
