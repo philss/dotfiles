@@ -9,7 +9,8 @@ vim.opt.number = true
 vim.opt.ruler = true
 vim.opt.showcmd = true
 vim.opt.termguicolors = true
-vim.opt.textwidth = 98
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
 vim.opt.visualbell = true
 
 -- Indentation and spacing
@@ -26,6 +27,7 @@ vim.opt.mouse = "a"
 vim.opt.undodir = os.getenv("HOME") .. "/tmp/neovim/undodir"
 vim.opt.undofile = true
 vim.opt.wrap = false
+vim.opt.linebreak = false
 vim.opt.clipboard:append("unnamedplus")
 
 -- Search 
