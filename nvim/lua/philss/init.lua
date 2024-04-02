@@ -1,3 +1,3 @@
-require('philss.packer')
+require('philss.plugins')
 require('philss.set')
 require('philss.remap')
