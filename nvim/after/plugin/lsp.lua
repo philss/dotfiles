@@ -1,35 +1,23 @@
 -- The LSP setup
 
-local elixir = require('elixir')
-local elixirls = require('elixir.elixirls')
-local lspconfig = require('lspconfig')
 local rust = require('rust-tools')
 
--- See the "completion.lua" file for nvim-cmp config.
-local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-elixir.setup({
-  credo = { enable = false },
-  elixirls = {
-    capabilities = cmp_capabilities,
-    -- default settings, use the `settings` function to override settings
-    settings = elixirls.settings({
-      dialyzerEnabled = false,
-      fetchDeps = false,
-      enableTestLenses = false,
-      suggestSpecs = false,
-    }),
-    on_attach = function(client, bufnr)
-      vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-      vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-      vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-    end
+-- Remember to install next-ls
+require("lspconfig")["nextls"].setup({
+  cmd = {"nextls", "--stdio"},
+  init_options = {
+    extensions = {
+      credo = { enable = true }
+    },
+    experimental = {
+      completions = { enable = true }
+    }
   }
 })
 
 rust.setup({
   server = {
-    capabilities = cmp_capabilities,
+    -- capabilities = cmp_capabilities,
     on_attach = function(_, bufnr)
       -- Hover actions
       vim.keymap.set("n", "<C-space>", rust.hover_actions.hover_actions, { buffer = bufnr })
