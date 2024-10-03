@@ -33,7 +33,7 @@ require("lazy").setup({
   "terryma/vim-multiple-cursors",
   "terrortylor/nvim-comment",
   { "kylechui/nvim-surround", version = '*' },
-  "numToStr/FTerm.nvim",
+  "adigitoleo/haunt.nvim",
   "tpope/vim-fugitive",
 
   -- Status bar

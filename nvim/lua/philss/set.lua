@@ -40,3 +40,6 @@ vim.opt.updatetime = 50
 -- Disabling the default file manager, because we are going to use nvim-tree.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Change the shell to zsh (default on MacOS) in order to have more compatibility.
+vim.o.shell = "/bin/zsh"
