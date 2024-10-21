@@ -55,6 +55,7 @@ require("lazy").setup({
   { "embark-theme/vim", name = "embark" },
   { "rose-pine/neovim", name = "rose-pine" },
   { "catppuccin/nvim" , name = "catppuccin" },
+  'Mofiqul/vscode.nvim',
 
   -- LSP
   "neovim/nvim-lspconfig",
