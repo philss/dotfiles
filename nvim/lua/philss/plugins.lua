@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "nvim-lua/plenary.nvim",
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.5",
+    "nvim-telescope/telescope.nvim", tag = "0.1.8",
     dependencies = { {"nvim-lua/plenary.nvim"} }
   },
 
@@ -35,9 +35,10 @@ require("lazy").setup({
   { "kylechui/nvim-surround", version = '*' },
   "adigitoleo/haunt.nvim",
   "tpope/vim-fugitive",
+  -- See keys in use
+  { "nvchad/showkeys", cmd = "ShowkeysToggle", config = { position = "top-right" } },
 
   -- Status bar
-  -- "kyazdani42/nvim-web-devicons",
   "tamton-aquib/staline.nvim",
 
   -- File tree
@@ -48,14 +49,11 @@ require("lazy").setup({
     }
   },
 
-  -- Minimap
-  "gorbit99/codewindow.nvim",
-
   -- Colorschemes
   { "embark-theme/vim", name = "embark" },
   { "rose-pine/neovim", name = "rose-pine" },
   { "catppuccin/nvim" , name = "catppuccin" },
-  'Mofiqul/vscode.nvim',
+  "Mofiqul/vscode.nvim",
 
   -- LSP
   "neovim/nvim-lspconfig",
