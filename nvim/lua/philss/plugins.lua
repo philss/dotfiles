@@ -29,14 +29,12 @@ require("lazy").setup({
   "nvim-treesitter/nvim-treesitter-textobjects",
 
   -- Utils
-  "phaazon/hop.nvim",
+  "smoka7/hop.nvim",
   "terryma/vim-multiple-cursors",
   "terrortylor/nvim-comment",
   { "kylechui/nvim-surround", version = '*' },
   "adigitoleo/haunt.nvim",
   "tpope/vim-fugitive",
-  -- See keys in use
-  { "nvchad/showkeys", cmd = "ShowkeysToggle", config = { position = "top-right" } },
 
   -- Status bar
   "tamton-aquib/staline.nvim",
@@ -53,11 +51,9 @@ require("lazy").setup({
   { "embark-theme/vim", name = "embark" },
   { "rose-pine/neovim", name = "rose-pine" },
   { "catppuccin/nvim" , name = "catppuccin" },
-  "Mofiqul/vscode.nvim",
 
   -- LSP
   "neovim/nvim-lspconfig",
-  { "elixir-tools/elixir-tools.nvim", dependencies = { 'nvim-lua/plenary.nvim' }},
   "simrat39/rust-tools.nvim",
 
   -- Completion
@@ -71,6 +67,14 @@ require("lazy").setup({
       "windwp/nvim-autopairs",
       event = "InsertEnter",
       opts = {} -- this is equalent to setup({}) function
+  },
+
+  -- Visualize empty spaces on when in visual mode
+  {
+    "mcauley-penney/visual-whitespace.nvim",
+    config = true,
+    event = "ModeChanged *:[vV\22]", -- optionally, lazy load on entering visual mode
+    opts = {},
   },
 
   -- Snips

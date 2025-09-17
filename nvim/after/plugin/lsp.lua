@@ -2,19 +2,6 @@
 
 local rust = require('rust-tools')
 
--- Remember to install next-ls
-require("lspconfig")["nextls"].setup({
-  cmd = {"nextls", "--stdio"},
-  init_options = {
-    extensions = {
-      credo = { enable = true }
-    },
-    experimental = {
-      completions = { enable = true }
-    }
-  }
-})
-
 rust.setup({
   server = {
     -- capabilities = cmp_capabilities,
@@ -26,6 +13,14 @@ rust.setup({
     end,
   },
 })
+
+vim.lsp.config('expert', {
+  cmd = { 'expert' },
+  root_markers = { 'mix.exs', '.git' },
+  file_types = { 'elixir', 'eelixir', 'heex' },
+})
+
+vim.lsp.enable('expert')
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
