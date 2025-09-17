@@ -1,2 +1,2 @@
 vim.o.termguicolors = true
-vim.cmd('colorscheme catppuccin-mocha')
+vim.cmd('colorscheme rose-pine-moon')
