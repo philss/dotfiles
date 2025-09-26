@@ -1,26 +1,28 @@
--- The LSP setup
+-- The LSP setup (Rust is on its own file, in ftplugin)
+-- The cmd is expected to be in PATH (normally under "~/.local/bin")
 
-local rust = require('rust-tools')
-
-rust.setup({
-  server = {
-    -- capabilities = cmp_capabilities,
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rust.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rust.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
-
+-- Elixir LSP
 vim.lsp.config('expert', {
   cmd = { 'expert' },
   root_markers = { 'mix.exs', '.git' },
   file_types = { 'elixir', 'eelixir', 'heex' },
 })
 
-vim.lsp.enable('expert')
+-- Zig LSP
+vim.lsp.config('zls', {
+  cmd = { 'zls' },
+  root_markers = { 'build.zig' },
+  file_types = { 'zig' },
+  settings = {
+    zls = {
+      -- Neovim already provides basic syntax highlighting
+      semantic_tokens = "partial",
+      -- Further information about build-on save:
+      -- https://zigtools.org/zls/guides/build-on-save/
+      -- enable_build_on_save = true,
+    },
+  },
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

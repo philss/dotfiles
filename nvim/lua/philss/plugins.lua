@@ -53,8 +53,11 @@ require("lazy").setup({
   { "catppuccin/nvim" , name = "catppuccin" },
 
   -- LSP
-  "neovim/nvim-lspconfig",
-  "simrat39/rust-tools.nvim",
+  {
+    "mrcjkb/rustaceanvim",
+    version = '^6',
+    lazy = false,
+  },
 
   -- Completion
   "hrsh7th/cmp-nvim-lsp",
