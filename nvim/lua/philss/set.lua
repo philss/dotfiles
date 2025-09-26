@@ -4,7 +4,7 @@
 -- Visual items
 vim.opt.colorcolumn = "+1"
 vim.opt.guicursor = ""
-vim.opt.laststatus = 2 
+vim.opt.laststatus = 2
 vim.opt.number = true
 vim.opt.ruler = true
 vim.opt.showcmd = true
@@ -30,7 +30,7 @@ vim.opt.wrap = false
 vim.opt.linebreak = false
 vim.opt.clipboard:append("unnamedplus")
 
--- Search 
+-- Search
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

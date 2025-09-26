@@ -1,3 +1,3 @@
-require('philss.plugins')
-require('philss.set')
-require('philss.remap')
+require("philss.plugins")
+require("philss.set")
+require("philss.remap")

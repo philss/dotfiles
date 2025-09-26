@@ -1,3 +1,3 @@
-local haunt = require('haunt')
+local haunt = require("haunt")
 
 haunt.setup()

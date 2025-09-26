@@ -17,14 +17,15 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "nvim-lua/plenary.nvim",
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.8",
-    dependencies = { {"nvim-lua/plenary.nvim"} }
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { { "nvim-lua/plenary.nvim" } },
   },
 
   -- It's going to fail in the first installation. Run "update" to fix it.
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    build = ":TSUpdate",
   },
   "nvim-treesitter/nvim-treesitter-textobjects",
 
@@ -32,7 +33,7 @@ require("lazy").setup({
   "smoka7/hop.nvim",
   "terryma/vim-multiple-cursors",
   "terrortylor/nvim-comment",
-  { "kylechui/nvim-surround", version = '*' },
+  { "kylechui/nvim-surround", version = "*" },
   "adigitoleo/haunt.nvim",
   "tpope/vim-fugitive",
 
@@ -44,18 +45,18 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-    }
+    },
   },
 
   -- Colorschemes
   { "embark-theme/vim", name = "embark" },
   { "rose-pine/neovim", name = "rose-pine" },
-  { "catppuccin/nvim" , name = "catppuccin" },
+  { "catppuccin/nvim", name = "catppuccin" },
 
   -- LSP
   {
     "mrcjkb/rustaceanvim",
-    version = '^6',
+    version = "^6",
     lazy = false,
   },
 
@@ -65,11 +66,11 @@ require("lazy").setup({
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/nvim-cmp",
-  
+
   {
-      "windwp/nvim-autopairs",
-      event = "InsertEnter",
-      opts = {} -- this is equalent to setup({}) function
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}, -- this is equalent to setup({}) function
   },
 
   -- Visualize empty spaces on when in visual mode
@@ -82,5 +83,5 @@ require("lazy").setup({
 
   -- Snips
   "hrsh7th/cmp-vsnip",
-  "hrsh7th/vim-vsnip"
+  "hrsh7th/vim-vsnip",
 })
