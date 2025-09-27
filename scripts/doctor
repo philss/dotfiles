@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+
+RESET='\033[0m'
+
+CYAN='\033[36m'
+GREEN='\033[32m'
+MAGENTA='\033[35m'
+RED='\033[31m'
+WHITE='\033[1;37m'
+YELLOW='\033[1;33m'
+
+# Checks for dependencies and provides suggestions for installing them.
+step() {
+  description=$1
+  command=$2
+  remedy=$3
+  exit_on_failure=true
+
+  echo -e "${CYAN}${description}${WHITE}... ${RESET}"
+  echo -e "${MAGENTA}${command}${RESET}"
+
+  eval "${command}"
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}OK${RESET}\n"
+  else
+    echo -e "${RED}FAILED${RESET}\n"
+    echo
+    echo -e "${CYAN}Possible remedy: \n${YELLOW}${remedy}${RESET}"
+
+    if ${exit_on_failure}; then
+      exit 1
+    fi
+  fi
+}
+
+os_family=$(uname -s)
+
+if [ "$os_family" == "Darwin" ]; then
+  step "Homebrew" \
+    "brew --version" \
+    "instructions at https://brew.sh"
+
+  step "NerdFont" \
+    "ls ~/Library/Fonts/FiraCodeNerdFont-Retina.ttf" \
+    "curl -L -o ~/FiraCode.tar.xz https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.tar.xz && tar -xvf ~/FiraCode.tar.xz -C ~/Library/Fonts/ && rm ~/FiraCode.tar.xz"
+fi
+
+step "Fish" \
+  "fish --version" \
+  "instructions at https://fishshell.com/"
+
+step "Asdf" \
+  "asdf --version" \
+  "instructions at https://asdf-vm.com/"
+
+step "Rustup" \
+  "rustup --version" \
+  "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+
+step "Rust" \
+  "rustc --version" \
+  "rustup default stable"
+
+step ".cargo/bin under path" \
+  "echo \$PATH | grep -q \".cargo/bin\"" \
+  "fish_add_path --path ~/.cargo/bin"
+
+step ".local/bin under path" \
+  "echo \$PATH | grep -q \".local/bin\"" \
+  "fish_add_path --path ~/.local/bin"
+
+step "bat (cat replacement)" \
+  "bat --version" \
+  "cargo install bat"
+
+step "fd-find (find replacement)" \
+  "fd --version" \
+  "cargo install fd-find"
+
+step "rg (grep replacement)" \
+  "rg --version" \
+  "cargo install ripgrep"
+
+step "eza (ls replacement)" \
+  "eza --version" \
+  "cargo install eza"
+
+step "zig" \
+  "zig version" \
+  "instructions: https://ziglang.org/download/"
+
+step "zls (zig's LSP)" \
+  "zls --version" \
+  "instructions: https://github.com/zigtools/zls/releases/tag/0.15.0"
+
+step "expert (elixir's LSP)" \
+  "which expert" \
+  "instructions: https://github.com/elixir-lang/expert"
+
+step "stylua (lua's formatter)" \
+  "stylua --version" \
+  "cargo install stylua"
+
+# asdf plugins
+
+step "asdf-erlang" \
+  "asdf plugin list | grep -q erlang" \
+  "read installation instructions: https://github.com/asdf-vm/asdf-erlang"
+
+step "asdf-elixir" \
+  "asdf plugin list | grep -q elixir" \
+  "asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git"
+
+step "asdf-nodejs" \
+  "asdf plugin list | grep -q nodejs" \
+  "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+
+# others
+python_user_base=$(python3 -m site --user-base)
+
+step "python local bin dir" \
+  "echo \$PATH | grep -q \"$python_user_base\"" \
+  "fish_add_path --path $python_user_base/bin"
+
+# ansible core is ansible without batteries included
+step "ansible" \
+  "ansible --version" \
+  "python3 -m pip install --user ansible-core"
