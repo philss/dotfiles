@@ -18,11 +18,14 @@ vim.keymap.set(
 -- Configures the floating terminal for tests.
 local haunt = require("haunt")
 
--- Zig only accepts the file name.
 function run_all_suite()
   haunt.term({ fargs = { "cargo", "test" } })
 end
 
+function cargo_run()
+  haunt.term({ fargs = { "cargo", "run" } })
+end
+
 vim.keymap.set("n", "<Leader>t", run_all_suite)
-vim.keymap.set("n", "<Leader>a", run_all_suite)
 vim.keymap.set("n", "<Leader>s", run_all_suite)
+vim.keymap.set("n", "<Leader>r", cargo_run)
