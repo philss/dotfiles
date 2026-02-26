@@ -62,13 +62,13 @@ step "Rust" \
   "rustc --version" \
   "rustup default stable"
 
-step ".cargo/bin under path" \
-  "echo \$PATH | grep -q \".cargo/bin\"" \
-  "fish_add_path --path ~/.cargo/bin"
-
 step ".local/bin under path" \
   "echo \$PATH | grep -q \".local/bin\"" \
-  "fish_add_path --path ~/.local/bin"
+  "copy the contents of fish/common.fish file to ~/.config/fish/config.fish"
+
+step ".cargo/bin under path" \
+  "echo \$PATH | grep -q \".cargo/bin\"" \
+  "set -gx --prepend PATH ~/.cargo/bin"
 
 step "bat (cat replacement)" \
   "bat --version" \
@@ -128,12 +128,20 @@ step "asdf-ruby" \
   "asdf plugin list | grep -q ruby" \
   "asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git"
 
+step "asdf main .tool-versions file" \
+  "ls -lah ~/.tool-versions" \
+  "ln -s $PWD/.tool-versions ~/.tool-versions"
+
+step "asdf current installed" \
+  "asdf current | grep -q true" \
+  "asdf install"
+
 # others
 python_user_base=$(python3 -m site --user-base)
 
 step "python local bin dir" \
   "echo \$PATH | grep -q \"$python_user_base\"" \
-  "fish_add_path --path $python_user_base/bin"
+  "set -gx --prepend PATH $python_user_base/bin"
 
 # ansible core is ansible without batteries included
 step "ansible" \
@@ -159,3 +167,7 @@ step "tmuxinator" \
 step "tmux config" \
   "ls -lah ~/.tmux.conf" \
   "ln -s $PWD/tmux.conf ~/.tmux.conf"
+
+step "tmux theme - catppuccin" \
+  "ls ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux" \
+  "mkdir -p ~/.config/tmux/plugins/catppuccin && git clone -b v2.1.3 git@github.com:catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux"
