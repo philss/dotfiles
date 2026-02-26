@@ -1,7 +1,5 @@
 # dot files
 
-![Vim and Tmux](./sample.png)
-
 Most of my configuration files.
 
 ## General dependencies
@@ -18,6 +16,10 @@ Most of my configuration files.
 - [bat](https://github.com/sharkdp/bat)
 - [fd-find](https://github.com/sharkdp/fd)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
+
+## Installation
+
+Just run the `scripts/doctor` and follow its instructions.
 
 ## License
 
