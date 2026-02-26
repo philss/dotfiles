@@ -1,28 +1,5 @@
--- The LSP setup (Rust is on its own file, in ftplugin)
--- The cmd is expected to be in PATH (normally under "~/.local/bin")
-
--- Elixir LSP
-vim.lsp.config("expert", {
-  cmd = { "expert" },
-  root_markers = { "mix.exs", ".git" },
-  file_types = { "elixir", "eelixir", "heex" },
-})
-
--- Zig LSP
-vim.lsp.config("zls", {
-  cmd = { "zls" },
-  root_markers = { "build.zig" },
-  file_types = { "zig" },
-  settings = {
-    zls = {
-      -- Neovim already provides basic syntax highlighting
-      semantic_tokens = "partial",
-      -- Further information about build-on save:
-      -- https://zigtools.org/zls/guides/build-on-save/
-      -- enable_build_on_save = true,
-    },
-  },
-})
+-- The LSP setup. Each language is configured
+-- in its own file under "nvim/after/ftplugin".
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

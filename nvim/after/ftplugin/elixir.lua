@@ -22,5 +22,12 @@ vim.keymap.set("n", "<Leader>t", run_tests)
 vim.keymap.set("n", "<Leader>a", run_all_tests)
 vim.keymap.set("n", "<Leader>s", run_suite)
 
+-- Elixir LSP
+vim.lsp.config("expert", {
+  cmd = { "expert" },
+  root_markers = { "mix.exs", ".git" },
+  file_types = { "elixir", "eelixir", "heex" },
+})
+
 -- Enable the LSP
 vim.lsp.enable("expert")

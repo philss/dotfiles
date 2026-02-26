@@ -102,6 +102,14 @@ step "stylua (lua's formatter)" \
   "stylua --version" \
   "cargo install stylua"
 
+step "tinymist (typst LSP)" \
+  "tinymist --version" \
+  "instructions: https://myriad-dreamin.github.io/tinymist/frontend/neovim.html"
+
+step "marksman (markdown LSP)" \
+  "marksman --version" \
+  "instructions: https://github.com/artempyanykh/marksman"
+
 # asdf plugins
 
 step "asdf-erlang" \
@@ -116,6 +124,10 @@ step "asdf-nodejs" \
   "asdf plugin list | grep -q nodejs" \
   "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
 
+step "asdf-ruby" \
+  "asdf plugin list | grep -q ruby" \
+  "asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git"
+
 # others
 python_user_base=$(python3 -m site --user-base)
 
@@ -127,3 +139,23 @@ step "python local bin dir" \
 step "ansible" \
   "ansible --version" \
   "python3 -m pip install --user ansible-core"
+
+# fish config for tmuxinator
+nvim_path=$(which nvim)
+fish_for_tmux="~/.config/fish/conf.d/for_tmux.fish"
+
+step "fish for tmuxinator" \
+  "ls -lah $fish_for_tmux && cat $fish_for_tmux | grep -q \"$nvim_path\"" \
+  "echo \"set -gx EDITOR \\\"$nvim_path\\\"\" >> $fish_for_tmux"
+
+step "ruby" \
+  "ruby -v" \
+  "asdf install ruby 3.4.5 && asdf global ruby 3.4.5"
+
+step "tmuxinator" \
+  "tmuxinator doctor" \
+  "gem install tmuxinator"
+
+step "tmux config" \
+  "ls -lah ~/.tmux.conf" \
+  "ln -s $PWD/tmux.conf ~/.tmux.conf"
