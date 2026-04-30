@@ -43,3 +43,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Change the shell to zsh (default on MacOS) in order to have more compatibility.
 vim.o.shell = "/bin/zsh"
+
+-- New experimental autocomplete
+vim.o.autocomplete = true

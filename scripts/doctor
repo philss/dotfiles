@@ -50,6 +50,10 @@ step "Fish" \
   "fish --version" \
   "instructions at https://fishshell.com/"
 
+step "Nvim" \
+  "nvim --version" \
+  "brew install neovim or similar"
+
 step "Asdf" \
   "asdf --version" \
   "instructions at https://asdf-vm.com/"
@@ -175,3 +179,7 @@ step "tmux config" \
 step "tmux theme - catppuccin" \
   "ls ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux" \
   "mkdir -p ~/.config/tmux/plugins/catppuccin && git clone -b v2.1.3 git@github.com:catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux"
+
+step "tree-sitter CLI" \
+  "tree-sitter --version" \
+  "cargo install --locked tree-sitter-cli"

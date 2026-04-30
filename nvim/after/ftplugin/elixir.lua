@@ -24,7 +24,7 @@ vim.keymap.set("n", "<Leader>s", run_suite)
 
 -- Elixir LSP
 vim.lsp.config("expert", {
-  cmd = { "expert" },
+  cmd = { "expert", "--stdio" },
   root_markers = { "mix.exs", ".git" },
   file_types = { "elixir", "eelixir", "heex" },
 })
