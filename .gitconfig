@@ -9,7 +9,6 @@
 [core]
   editor = nvim
   excludesfile = /home/philip/.config/git/global_ignore
-  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 
 [push]
   default = simple
@@ -20,14 +19,21 @@
 [commit]
   gpgsign = true
 
-[alias]
-  commit = commit -S -v
+[gpg]
+  format = ssh
 
-[interactive]
-  diffFilter = delta --color-only
-
-[merge]
-  tool = vimdiff
+[gpg "ssh"]
+  allowedSignersFile = /full-path-to/.config/git/allowed_signers
+  program = "/full-path-to-pass-manager-program"
 
 [init]
   defaultBranch = main
+
+[difftool "nvim_difftool"]
+  cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+
+[diff]
+  tool = nvim_difftool
+
+[merge]
+  tool = nvim_difftool
