@@ -13,13 +13,21 @@ if status is-interactive
   abbr -a tree "eza -T"
 end
 
-# Local bins
+# Local binaries
 set _local_bin "$HOME/.local/bin"
 if not contains $_local_bin $PATH
   mkdir -p $_local_bin
   set -gx --prepend PATH $_local_bin
 end
 set --erase _local_bin
+
+# Python binaries (for current python version)
+set _python_user_base (python3 -m site --user-base)
+if not contains $_python_user_base $PATH
+  mkdir -p $_python_user_base
+  set -gx --prepend PATH $_python_user_base
+end
+set --erase _python_user_base
 
 # ASDF configuration code (version  ~> 0.18.0)
 if test -z $ASDF_DATA_DIR

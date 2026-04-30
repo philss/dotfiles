@@ -68,11 +68,11 @@ step "Rust" \
 
 step ".local/bin under path" \
   "echo \$PATH | grep -q \".local/bin\"" \
-  "copy the contents of fish/common.fish file to ~/.config/fish/config.fish"
+  "cp fish/common.fish ~/.config/fish/config.fish"
 
 step ".cargo/bin under path" \
   "echo \$PATH | grep -q \".cargo/bin\"" \
-  "set -gx --prepend PATH ~/.cargo/bin"
+  "cp fish/common.fish ~/.config/fish/config.fish"
 
 step "bat (cat replacement)" \
   "bat --version" \
@@ -149,7 +149,7 @@ python_user_base=$(python3 -m site --user-base)
 
 step "python local bin dir" \
   "echo \$PATH | grep -q \"$python_user_base\"" \
-  "set -gx --prepend PATH $python_user_base/bin"
+  "cp fish/common.fish ~/.config/fish/config.fish"
 
 # ansible core is ansible without batteries included
 step "ansible" \
