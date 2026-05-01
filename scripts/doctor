@@ -156,6 +156,10 @@ step "ansible" \
   "ansible --version" \
   "python3 -m pip install --user ansible-core"
 
+step "tmux" \
+  "tmux -h" \
+  "brew install tmux (or equivalent)"
+
 # fish config for tmuxinator
 nvim_path=$(which nvim)
 fish_for_tmux="~/.config/fish/conf.d/for_tmux.fish"

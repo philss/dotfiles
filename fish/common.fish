@@ -22,7 +22,7 @@ end
 set --erase _local_bin
 
 # Python binaries (for current python version)
-set _python_user_base (python3 -m site --user-base)
+set _python_user_base (python3 -m site --user-base)"/bin"
 if not contains $_python_user_base $PATH
   mkdir -p $_python_user_base
   set -gx --prepend PATH $_python_user_base
