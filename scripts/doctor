@@ -96,7 +96,7 @@ step "zig" \
 
 step "zls (zig's LSP)" \
   "zls --version" \
-  "instructions: https://github.com/zigtools/zls/releases/tag/0.15.0"
+  "instructions: https://github.com/zigtools/zls/releases/tag/0.16.0"
 
 step "expert (elixir's LSP)" \
   "which expert" \
@@ -110,9 +110,9 @@ step "tinymist (typst LSP)" \
   "tinymist --version" \
   "instructions: https://myriad-dreamin.github.io/tinymist/frontend/neovim.html"
 
-step "marksman (markdown LSP)" \
-  "marksman --version" \
-  "instructions: https://github.com/artempyanykh/marksman"
+# step "marksman (markdown LSP)" \
+#   "marksman --version" \
+#   "instructions: https://github.com/artempyanykh/marksman"
 
 # asdf plugins
 
@@ -124,9 +124,9 @@ step "asdf-elixir" \
   "asdf plugin list | grep -q elixir" \
   "asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git"
 
-step "asdf-nodejs" \
-  "asdf plugin list | grep -q nodejs" \
-  "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+# step "asdf-nodejs" \
+#   "asdf plugin list | grep -q nodejs" \
+#   "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
 
 step "asdf-ruby" \
   "asdf plugin list | grep -q ruby" \
